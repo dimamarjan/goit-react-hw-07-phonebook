@@ -21,8 +21,7 @@ export function ContactForm() {
             name: nameContact.toLowerCase(),
             number: numberContact
         };
-        target.elements.name.value = "";
-            target.elements.number.value = "";
+        target.reset();
         return contactItem;
     }
 
@@ -35,8 +34,7 @@ export function ContactForm() {
             const namesArr = contactsArr.map(i => i.name);
             const numberArr = contactsArr.map(i => i.number);
             if (namesArr.includes(name.toLowerCase()) || numberArr.includes(number)) {
-                e.target.elements.name.value = "";
-                e.target.elements.number.value = "";
+                e.target.reset();
                 return;
             } else {
                 const newContact = contactForm(name, number, e)
