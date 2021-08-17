@@ -1,5 +1,5 @@
 {
-  "name": "goit-react-hw-06-phonebook-refactored",
+  "name": "goit-react-hw-07-phonebook",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -28,7 +28,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://dimamarjan.github.io/goit-react-hw-06-phonebook-refactored",
+  "homepage": "https://dimamarjan.github.io/goit-react-hw-07-phonebook",
   "eslintConfig": {
     "extends": [
       "react-app",

@@ -51,7 +51,7 @@ export function ContactList() {
 
     useEffect(() => {
         dispatch(getContactsData())
-    }, [dispatch])
+    }, [dispatch, store])
 
     useEffect(() => {
         if (filteredArr.length !== 0) {
@@ -62,9 +62,6 @@ export function ContactList() {
             setShowList(true);
         }
     }, [filteredArr.length])
-
-
-
 
 
     return (

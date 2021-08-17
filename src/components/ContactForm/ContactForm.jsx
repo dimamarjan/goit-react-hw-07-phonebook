@@ -24,8 +24,7 @@ export function ContactForm() {
             name: nameContact.toLowerCase(),
             number: numberContact
         };
-        target.elements.name.value = "";
-        target.elements.number.value = "";
+        target.reset();
         return contactItem;
     }
 
