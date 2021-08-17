@@ -1,24 +1,23 @@
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { delContact } from 'redux/slices/items';
-
+import { getContactsData, delContactData  } from "redux/slices/contacts";
 
 import { ContactListSection } from 'components/ContactList/ContactList.style'
 import { ContactListView } from 'views/ContactListView';
 
 export function ContactList() {
-    const store = useSelector(store => store.items);
+    const store = useSelector(store => store.contacts.items);
     const filterData = useSelector(store => store.filter);
     const dispatch = useDispatch();
     const [filteredArr, setFilteredArr] = useState([]);
     const [dataToDelete, setDataToDelete] = useState();
 
     const [showFilteredList, setShowFilteredList] = useState(false);
-    const [showList, setShoList] = useState(false);
+    const [showList, setShowList] = useState(false);
 
     const onDeleteHeandler = ({ target }) => {
-        setDataToDelete(target.id);
+       setDataToDelete(target.id);
     };
 
 
@@ -27,7 +26,7 @@ export function ContactList() {
             if (toString(filterData)) {
                 setFilteredArr([
                     ...store.filter((contact => {
-                        return contact.name.indexOf(filterData) > -1;
+                        return contact.name.indexOf(filterData.toLowerCase()) > -1;
                     }))
                 ])
             };
@@ -38,29 +37,34 @@ export function ContactList() {
                     }))
                 ])
             };
-
         } else {
             setFilteredArr([]);
         }
     }, [filterData, store])
+ 
 
+    useEffect(() => {
+        if (dataToDelete) {
+            dispatch(delContactData(dataToDelete));
+        }
+    }, [dataToDelete, dispatch])
+
+    useEffect(() => {
+        dispatch(getContactsData())
+    }, [dispatch])
 
     useEffect(() => {
         if (filteredArr.length !== 0) {
-            setShoList(false);
+            setShowList(false);
             setShowFilteredList(true);
         } else {
             setShowFilteredList(false);
-            setShoList(true);
+            setShowList(true);
         }
     }, [filteredArr.length])
 
 
-    useEffect(() => {
-        if (dataToDelete) {
-            dispatch(delContact(dataToDelete));
-        }
-    }, [dataToDelete, dispatch])
+
 
 
     return (

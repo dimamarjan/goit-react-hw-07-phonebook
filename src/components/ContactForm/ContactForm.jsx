@@ -7,21 +7,20 @@ import {
     SubmitButton
 } from 'components/ContactForm/ContactForm.style'
 import { useDispatch, useSelector} from 'react-redux';
-import { addContact } from 'redux/slices/items';
-import { nanoid } from 'nanoid'
+import { addContactData } from 'redux/slices/contacts';
+
 
 
 
 
 export function ContactForm() {
     const dispatch = useDispatch();
-    const contactsArr = useSelector((store) => store.items)
+    const contactsArr = useSelector(store => store.contacts.items);
     const [newContactsArr, setNewContactsArr] = useState();
 
 
     const contactForm = (nameContact, numberContact, {target} ) => {
         const contactItem = {
-            id: nanoid(),
             name: nameContact.toLowerCase(),
             number: numberContact
         };
@@ -30,7 +29,7 @@ export function ContactForm() {
         return contactItem;
     }
 
-    
+   
     const onSubmitHandle = (e) => {
         e.preventDefault();
         const name = e.target.elements.name.value;
@@ -54,7 +53,7 @@ export function ContactForm() {
 
     useEffect(() => {
         if (newContactsArr) {
-            dispatch(addContact(newContactsArr));
+            dispatch(addContactData(newContactsArr));
         }
     },[dispatch, newContactsArr])
 
