@@ -17,9 +17,13 @@ export function ContactList() {
     const [showList, setShowList] = useState(false);
 
     const onDeleteHeandler = ({ target }) => {
-       setDataToDelete(target.id);
+        dispatch(delContactData(target.id));
+        setDataToDelete(target.id);
     };
 
+    useEffect(() => {
+            dispatch(getContactsData());
+    }, [dispatch])
 
     useEffect(() => {
         if (filterData) {
@@ -41,17 +45,13 @@ export function ContactList() {
             setFilteredArr([]);
         }
     }, [filterData, store])
- 
 
     useEffect(() => {
         if (dataToDelete) {
-            dispatch(delContactData(dataToDelete));
+            dispatch(getContactsData());
+            setDataToDelete("");
         }
     }, [dataToDelete, dispatch])
-
-    useEffect(() => {
-        dispatch(getContactsData())
-    }, [dispatch, store])
 
     useEffect(() => {
         if (filteredArr.length !== 0) {

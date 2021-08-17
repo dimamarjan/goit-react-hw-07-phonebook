@@ -10,9 +10,6 @@ import { useDispatch, useSelector} from 'react-redux';
 import { addContactData } from 'redux/slices/contacts';
 
 
-
-
-
 export function ContactForm() {
     const dispatch = useDispatch();
     const contactsArr = useSelector(store => store.contacts.items);
@@ -24,7 +21,8 @@ export function ContactForm() {
             name: nameContact.toLowerCase(),
             number: numberContact
         };
-        target.reset();
+        target.elements.name.value = "";
+            target.elements.number.value = "";
         return contactItem;
     }
 
